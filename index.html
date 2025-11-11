@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>GTI va NS</title>
 <style>
+
+    
     /* BODY VA UMUMIY STIL */
     body { font-family:'Segoe UI','Roboto','Arial',sans-serif; background:#f4f6f8; margin:0; padding:0; line-height:1.6; color:#333; }
     
@@ -213,16 +215,14 @@ function extractKeywords(blocks){
     return keywordsMap;
 }
 
-/* --- 5. Kalit so‘zlarni guruhlash --- */
 function buildKeywordSignatures(keywordsMap){
     let sigMap = {};
     for(let idx in keywordsMap){
-        let arr = Array.from(keywordsMap[idx]);
+        let arr = Array.from(keywordsMap[idx]); 
         if(arr.length === 0) continue;
-        let norm = arr.map(w => w.trim()).filter(w=>w.length>0);
-        norm.sort((a,b)=> a.toLowerCase().localeCompare(b.toLowerCase()));
-        let signature = norm.join(", ");
-        if(!sigMap[signature]) sigMap[signature] = { indices: [], words: norm };
+        // sort qilmaymiz, so‘zlarni qo‘lda kelgan tartibda saqlaymiz
+        let signature = arr.join(" "); // bo‘sh joy bilan ajratamiz
+        if(!sigMap[signature]) sigMap[signature] = { indices: [], words: arr };
         sigMap[signature].indices.push(parseInt(idx)+1);
     }
     return sigMap;
@@ -418,7 +418,7 @@ if(longAnswer.length>0){
 
     
 
-    // 🔟 Kalit so‘zlar aniqlangan javoblar (guruhlangan)
+// 🔟 Kalit so‘zlar aniqlangan javoblar (guruhlangan)
 let keywordsMap = extractKeywords(blocks);
 let sigMap = buildKeywordSignatures(keywordsMap);
 
@@ -437,11 +437,10 @@ if(Object.keys(sigMap).length > 0){
     groups.forEach(g=>{
         // Raqamlarni nuqta-vergul bilan birlashtiramiz
         let indicesStr = g.indices.join("; ");
-        let wordsStr = g.words.join(", ");
+        let wordsStr = g.words.join(" ");  // <-- bu yerda vergul o‘rniga bo‘sh joy
         let span = document.createElement("span");
         span.className = "clickable-error";
         span.innerHTML = indicesStr + "; " + wordsStr;
-        // Birinchi raqamga scroll qiladigan funksiya
         span.onclick = ()=>{ scrollToQuestion(g.indices[0]); };
         kwDiv.appendChild(span);
         kwDiv.appendChild(document.createElement("br"));
@@ -449,6 +448,7 @@ if(Object.keys(sigMap).length > 0){
     });
     modalDiv.appendChild(kwDiv);
 }
+
 
 
     // 1️⃣1️⃣ Kichik/bosh harflar tufayli shubhali javoblar
