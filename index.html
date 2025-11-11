@@ -46,6 +46,63 @@
 </style>
 </head>
 <body>
+    
+<!-- RASMIY PAROL PANELI -->
+<div id="passwordModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#f5f5f5; z-index:9999; display:flex; justify-content:center; align-items:center;">
+  <div style="width:400px; max-width:90%; text-align:center; padding:40px; border-radius:12px; background:#ffffff; color:#333; box-shadow:0 10px 30px rgba(0,0,0,0.15); animation: slideDown 0.5s ease; font-family:'Segoe UI',Arial,sans-serif;">
+    <h2 style="margin-bottom:25px; font-size:1.5em; font-weight:bold; letter-spacing:0.5px;">Dasturga kirish</h2>
+    <input type="password" id="passwordInput" placeholder="Parolni kiriting..." 
+           style="width:100%; padding:12px; margin-bottom:20px; border-radius:6px; border:1px solid #ccc; font-size:1em; outline:none; transition:0.3s; background:#fefefe; color:#333;">
+    <button id="loginBtn" 
+            style="width:100%; padding:12px; border-radius:6px; border:none; background:#4a90e2; color:white; font-weight:bold; font-size:1em; cursor:pointer; transition:0.3s;">Kirish</button>
+    <div id="passwordError" style="color:#d9534f; margin-top:15px; font-weight:bold; font-size:1em;"></div>
+  </div>
+</div>
+
+<style>
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+@keyframes slideDown { from {transform:translateY(-30px); opacity:0;} to {transform:translateY(0); opacity:1;} }
+
+/* Hover effekt */
+#loginBtn:hover { background:#357ab8; }
+
+/* Input focus */
+#passwordInput:focus { border-color:#4a90e2; box-shadow:0 0 8px rgba(74,144,226,0.4);}
+</style>
+
+<script>
+const passwordModal = document.getElementById("passwordModal");
+const passwordInput = document.getElementById("passwordInput");
+const loginBtn = document.getElementById("loginBtn");
+const errorDiv = document.getElementById("passwordError");
+
+function checkPassword() {
+    if(passwordInput.value === "9") {
+        passwordModal.style.display = "none";
+    } else {
+        errorDiv.innerText = "Parol noto‘g‘ri!";
+        passwordInput.value = "";
+        errorDiv.style.animation = "shake 0.5s";
+        errorDiv.addEventListener("animationend", ()=>{ errorDiv.style.animation = ""; });
+    }
+}
+
+// Enter tugmasi ishlaydi
+passwordInput.addEventListener("keyup", function(event) {
+    if(event.key === "Enter") loginBtn.click();
+});
+
+loginBtn.addEventListener("click", checkPassword);
+</script>
+
+    
 <header>GTI va NS kafedrasi</header>
 <main>
     <!-- SOZLAMALAR BO'LIMI -->
