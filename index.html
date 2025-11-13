@@ -2,7 +2,8 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<title>GTI va NS</title>
+<title>I & M — Test Tahlilchi</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
 <style>
 
     
@@ -105,29 +106,39 @@ loginBtn.addEventListener("click", checkPassword);
 </script>
 
     
-<header>GTI va NS kafedrasi</header>
+<header>Professional test platformasi</header>
 <main>
-    <!-- SOZLAMALAR BO'LIMI -->
-    <div class="section">
-        <h2>Sozlamalar</h2>
-        <label>Raqamlash:</label>
-        <select id="numbering"><option value="yes">Ha</option><option value="no">Yo‘q</option></select>
+   <!-- SOZLAMALAR BO'LIMI -->
+<div class="section">
+    <h2>Sozlamalar</h2>
 
-        <label>Variantlar (a, b, c…)</label>
-        <select id="abcMode"><option value="yes">Ha</option><option value="no">Yo‘q</option></select>
+    <label>Raqamlash:</label>
+    <select id="numbering">
+        <option value="yes">Ha</option>
+        <option value="no" selected>Yo‘q</option>
+    </select>
 
-        <label>Savollar orasida bo‘sh qator qo‘yilsinmi?</label>
-        <select id="addEnter"><option value="yes">Ha</option><option value="no">Yo‘q</option></select>
+    <label>Variantlar (a, b, c…)</label>
+    <select id="abcMode">
+        <option value="yes">Ha</option>
+        <option value="no" selected>Yo‘q</option>
+    </select>
 
-        <label>Savol oldidagi belgi:</label>
-        <input id="blockPrefix" value="++++">
+    <label>Savollar orasida bo‘sh qator qo‘yilsinmi?</label>
+    <select id="addEnter">
+        <option value="yes">Ha</option>
+        <option value="no" selected>Yo‘q</option>
+    </select>
 
-        <label>To'g'ri javob oldidagi belgi:</label>
-        <input id="firstPrefix" value="====#">
+    <label>Savol oldidagi belgi:</label>
+    <input id="blockPrefix" value="++++">
 
-        <label>Noto'g'ri javob oldidagi belgi:</label>
-        <input id="otherPrefix" value="====">
-    </div>
+    <label>To'g'ri javob oldidagi belgi:</label>
+    <input id="firstPrefix" value="====#">
+
+    <label>Noto'g'ri javob oldidagi belgi:</label>
+    <input id="otherPrefix" value="====">
+</div>
 
     <!-- SAVOLLAR KIRITING -->
     <div class="section">
