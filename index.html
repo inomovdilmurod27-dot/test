@@ -5,129 +5,92 @@
 <title>I & M — Test Tahlilchi</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
 <style>
+  body{font-family:'Segoe UI','Roboto','Arial',sans-serif;background:#f4f6f8;margin:0;padding:0;line-height:1.6;color:#333}
+  header{background:#4a90e2;color:#fff;padding:20px;text-align:center;font-size:1.7em;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+  main{padding:25px;max-width:950px;margin:auto}
+  label{font-weight:700;margin-top:12px;display:block;font-size:1.05em}
+  select,input,textarea,button{width:100%;margin-top:6px;margin-bottom:12px;padding:10px;border-radius:8px;border:1px solid #ccc;font-size:1em;box-sizing:border-box;font-family:'Segoe UI','Roboto','Arial',sans-serif}
+  button{background:#4a90e2;color:#fff;border:none;cursor:pointer;font-weight:700;transition:.3s;font-size:1.05em}
+  button:hover{background:#357ab8}
+  textarea{min-height:180px;resize:vertical;font-size:1em;line-height:1.5}
 
-    
-    /* BODY VA UMUMIY STIL */
-    body { font-family:'Segoe UI','Roboto','Arial',sans-serif; background:#f4f6f8; margin:0; padding:0; line-height:1.6; color:#333; }
-    
-    /* HEADER STILI */
-    header { background:#4a90e2; color:white; padding:20px; text-align:center; font-size:1.7em; font-weight:bold; box-shadow:0 2px 5px rgba(0,0,0,0.2);}    
-    
-    /* ASOSIY KONTEYNER */
-    main { padding:25px; max-width:950px; margin:auto; }
-    
-    /* FORMA ELEMENTLARI STILI */
-    label { font-weight:bold; margin-top:12px; display:block; font-size:1.05em;}
-    select, input, textarea, button { width:100%; margin-top:6px; margin-bottom:12px; padding:10px; border-radius:8px; border:1px solid #ccc; font-size:1em; box-sizing:border-box; font-family:'Segoe UI','Roboto','Arial',sans-serif; }
-    button { background-color:#4a90e2; color:white; border:none; cursor:pointer; font-weight:bold; transition:0.3s; font-size:1.05em; }
-    button:hover { background-color:#357ab8; }
-    textarea { min-height:180px; resize:vertical; font-size:1em; line-height:1.5; }
-    
-    /* MODAL (POPUP) STILI */
-    .modal { display:none; position:fixed; z-index:999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color: rgba(0,0,0,0.6); animation: fadeIn 0.4s; }
-    .modal-content { background-color:#fff; margin:60px auto; padding:30px; border-radius:15px; border:1px solid #888; width:90%; max-width:950px; max-height:80%; overflow-y:auto; white-space:pre-wrap; font-family:'Segoe UI','Roboto','Arial',monospace; box-shadow:0 8px 25px rgba(0,0,0,0.3); animation: slideDown 0.4s ease; font-size:1em; line-height:1.5; }
-    .close { color:#444; float:right; font-size:32px; font-weight:bold; cursor:pointer; transition:0.2s;}
-    .close:hover { color:#000; }
-    
-    h2 { color:#333; margin-bottom:15px; font-size:1.3em; }
-    
-    /* SAVOLLAR VA JAVOBLAR BLOKLARI */
-    .section { background:#fff; padding:25px; margin-bottom:25px; border-radius:12px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
-    .question { background-color:#e6f0ff; margin-bottom:10px; padding:10px; border-radius:6px; transition:0.3s; font-size:1.05em; }
-    .answer { background-color:#f0f0f0; margin-left:20px; padding:6px; border-radius:4px; margin-bottom:4px; font-size:1em; }
-    .keyword { color:green; font-weight:bold; }
-    .repeat { color:red; font-weight:bold; }
-    #errorDiv { background:#fff3cd; border:1px solid #ffeeba; padding:15px; border-radius:8px; margin-top:15px; color:#856404; font-size:1em; }
+  .section{background:#fff;padding:25px;margin-bottom:25px;border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.1)}
+  .question{background:#e6f0ff;margin-bottom:10px;padding:10px;border-radius:6px;transition:.3s;font-size:1.05em}
+  .answer{background:#f0f0f0;margin-left:20px;padding:6px;border-radius:4px;margin-bottom:4px;font-size:1em}
+  #errorDiv{background:#fff3cd;border:1px solid #ffeeba;padding:15px;border-radius:8px;margin-top:15px;color:#856404;font-size:1em}
 
-    /* CLICKABLE XATOLIK ELEMENTLARI */
-    .clickable-error { cursor:pointer; color:#d9534f; text-decoration:underline; }
-    .highlight-question { background: yellow !important; }
+  .modal{display:none;position:fixed;z-index:999;left:0;top:0;width:100%;height:100%;overflow:auto;background:rgba(0,0,0,.6);animation:fadeIn .4s}
+  .modal-content{background:#fff;margin:60px auto;padding:30px;border-radius:15px;border:1px solid #888;width:90%;max-width:950px;max-height:80%;overflow-y:auto;white-space:pre-wrap;font-family:'Segoe UI','Roboto','Arial',monospace;box-shadow:0 8px 25px rgba(0,0,0,.3);animation:slideDown .4s ease;font-size:1em;line-height:1.5}
+  .close{color:#444;float:right;font-size:32px;font-weight:700;cursor:pointer;transition:.2s}
+  .close:hover{color:#000}
 
-    /* ANIMATSIYA */
-    @keyframes slideDown { from {transform:translateY(-50px); opacity:0;} to {transform:translateY(0); opacity:1;} }
-    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+  .highlight-question{background:yellow!important}
+  #variantOutput{min-height:220px;font-family:'Segoe UI','Roboto','Arial',monospace;white-space:pre}
+
+  .keyWrap{border:1px solid #333;background:#fff;overflow:auto;padding:0}
+  .keyTableOne{width:max-content;min-width:100%;border-collapse:collapse;table-layout:fixed;font-family:'Segoe UI','Roboto','Arial',sans-serif}
+  .keyTableOne th,.keyTableOne td{border:1px solid #333;text-align:center;padding:4px 6px;font-size:14px;line-height:1.2;white-space:nowrap}
+  .keyVariantTitle{font-weight:700;background:#fff}
+
+  .clickable-error{cursor:pointer;color:#d9534f;text-decoration:underline}
+  .keyword{color:green;font-weight:700}
+  .repeat{color:red;font-weight:700}
+
+  @keyframes slideDown{from{transform:translateY(-50px);opacity:0}to{transform:translateY(0);opacity:1}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes shake{0%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}100%{transform:translateX(0)}}
 </style>
 </head>
 <body>
-    
-<!-- RASMIY PAROL PANELI -->
-<div id="passwordModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#f5f5f5; z-index:9999; display:flex; justify-content:center; align-items:center;">
-  <div style="width:400px; max-width:90%; text-align:center; padding:40px; border-radius:12px; background:#ffffff; color:#333; box-shadow:0 10px 30px rgba(0,0,0,0.15); animation: slideDown 0.5s ease; font-family:'Segoe UI',Arial,sans-serif;">
-    <h2 style="margin-bottom:25px; font-size:1.5em; font-weight:bold; letter-spacing:0.5px;">Dasturga kirish</h2>
-    <input type="password" id="passwordInput" placeholder="Parolni kiriting..." 
-           style="width:100%; padding:12px; margin-bottom:20px; border-radius:6px; border:1px solid #ccc; font-size:1em; outline:none; transition:0.3s; background:#fefefe; color:#333;">
-    <button id="loginBtn" 
-            style="width:100%; padding:12px; border-radius:6px; border:none; background:#4a90e2; color:white; font-weight:bold; font-size:1em; cursor:pointer; transition:0.3s;">Kirish</button>
-    <div id="passwordError" style="color:#d9534f; margin-top:15px; font-weight:bold; font-size:1em;"></div>
+
+<!-- PAROL PANELI -->
+<div id="passwordModal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#f5f5f5;z-index:9999;display:flex;justify-content:center;align-items:center;">
+  <div style="width:400px;max-width:90%;text-align:center;padding:40px;border-radius:12px;background:#fff;color:#333;box-shadow:0 10px 30px rgba(0,0,0,.15);animation:slideDown .5s ease;font-family:'Segoe UI',Arial,sans-serif;">
+    <h2 style="margin-bottom:25px;font-size:1.5em;font-weight:700;letter-spacing:.5px;">Dasturga kirish</h2>
+    <input type="password" id="passwordInput" placeholder="Parolni kiriting..." style="width:100%;padding:12px;margin-bottom:20px;border-radius:6px;border:1px solid #ccc;font-size:1em;outline:none;transition:.3s;background:#fefefe;color:#333;">
+    <button id="loginBtn" style="width:100%;padding:12px;border-radius:6px;border:none;background:#4a90e2;color:white;font-weight:700;font-size:1em;cursor:pointer;transition:.3s;">Kirish</button>
+    <div id="passwordError" style="color:#d9534f;margin-top:15px;font-weight:700;font-size:1em;"></div>
   </div>
 </div>
-
 <style>
-@keyframes shake {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-6px); }
-  40% { transform: translateX(6px); }
-  60% { transform: translateX(-6px); }
-  80% { transform: translateX(6px); }
-  100% { transform: translateX(0); }
-}
-@keyframes slideDown { from {transform:translateY(-30px); opacity:0;} to {transform:translateY(0); opacity:1;} }
-
-/* Hover effekt */
-#loginBtn:hover { background:#357ab8; }
-
-/* Input focus */
-#passwordInput:focus { border-color:#4a90e2; box-shadow:0 0 8px rgba(74,144,226,0.4);}
+  #loginBtn:hover{background:#357ab8}
+  #passwordInput:focus{border-color:#4a90e2;box-shadow:0 0 8px rgba(74,144,226,.4)}
 </style>
 
-<script>
-const passwordModal = document.getElementById("passwordModal");
-const passwordInput = document.getElementById("passwordInput");
-const loginBtn = document.getElementById("loginBtn");
-const errorDiv = document.getElementById("passwordError");
-
-function checkPassword() {
-    if(passwordInput.value === "9") {
-        passwordModal.style.display = "none";
-    } else {
-        errorDiv.innerText = "Parol noto‘g‘ri!";
-        passwordInput.value = "";
-        errorDiv.style.animation = "shake 0.5s";
-        errorDiv.addEventListener("animationend", ()=>{ errorDiv.style.animation = ""; });
-    }
-}
-
-// Enter tugmasi ishlaydi
-passwordInput.addEventListener("keyup", function(event) {
-    if(event.key === "Enter") loginBtn.click();
-});
-
-loginBtn.addEventListener("click", checkPassword);
-</script>
-
-    
 <header>Professional test platformasi</header>
+
 <main>
-   <!-- SOZLAMALAR BO'LIMI -->
-<div class="section">
+  <div class="section">
     <h2>Sozlamalar</h2>
 
     <label>Raqamlash:</label>
     <select id="numbering">
-        <option value="yes">Ha</option>
-        <option value="no" selected>Yo‘q</option>
+      <option value="yes">Ha</option>
+      <option value="no" selected>Yo‘q</option>
     </select>
 
     <label>Variantlar (a, b, c…)</label>
     <select id="abcMode">
-        <option value="yes">Ha</option>
-        <option value="no" selected>Yo‘q</option>
+      <option value="yes">Ha</option>
+      <option value="no" selected>Yo‘q</option>
     </select>
 
     <label>Savollar orasida bo‘sh qator qo‘yilsinmi?</label>
     <select id="addEnter">
-        <option value="yes">Ha</option>
-        <option value="no" selected>Yo‘q</option>
+      <option value="yes">Ha</option>
+      <option value="no" selected>Yo‘q</option>
+    </select>
+
+    <label>Randomizator (savollarni aralashtirish):</label>
+    <select id="randomizeQuestions">
+      <option value="yes">Ha</option>
+      <option value="no" selected>Yo‘q</option>
+    </select>
+
+    <label>Randomizator (javoblarni aralashtirish):</label>
+    <select id="randomizeAnswers">
+      <option value="yes">Ha</option>
+      <option value="no" selected>Yo‘q</option>
     </select>
 
     <label>Savol oldidagi belgi:</label>
@@ -138,17 +101,40 @@ loginBtn.addEventListener("click", checkPassword);
 
     <label>Noto'g'ri javob oldidagi belgi:</label>
     <input id="otherPrefix" value="====">
-</div>
+  </div>
 
-    <!-- SAVOLLAR KIRITING -->
-    <div class="section">
-        <h2>Savollarni kiriting</h2>
-        <textarea id="inputText" placeholder="Savollarni kiriting..."></textarea>
-        <button onclick="showResult()">Natijani Ko‘rish</button>
-        <div id="errorDiv"></div>
-    </div>
+  <div class="section">
+    <h2>Savollarni kiriting</h2>
+    <textarea id="inputText" placeholder="Savollarni kiriting..."></textarea>
+    <button onclick="showResult()">Natijani Ko‘rish</button>
+    <div id="errorDiv"></div>
+  </div>
+
+  <div class="section">
+    <h2>Variant yasash (takrorsiz)</h2>
+
+    <label>Variantlar soni (0 bo‘lsa — hamma savol 1 ta to‘liq):</label>
+    <input id="variantCount" type="number" value="0" min="0">
+
+    <label>Har bir variant savollari soni (0 bo‘lsa — hamma savol):</label>
+    <input id="perVariant" type="number" value="0" min="0">
+
+    <button onclick="generateVariants()">Variantlarni yasash</button>
+
+    <label>Natija:</label>
+    <textarea id="variantOutput" readonly placeholder="Variant natijasi shu yerda chiqadi..."></textarea>
+
+    <button onclick="copyVariantOutput()">Natijani nusxa olish</button>
+
+    <h2 style="margin-top:18px;">To‘g‘ri javoblar (Jadval)</h2>
+    <button onclick="buildAnswerKeyFromVariantOutput()">To‘g‘ri javoblarni jadval qilib chiqarish</button>
+    <button onclick="downloadAnswerKeyWord()">🧾 Jadvalni Word (A4 Albom) yuklab olish</button>
+
+    <button onclick="downloadStudentWord()">👨‍🎓 Talaba uchun (savol-javob) Word yuklab olish</button>
+
+    <div class="keyWrap" id="answerKeyWrap"></div>
+  </div>
 </main>
-
 
 <div id="resultModal" class="modal">
   <div class="modal-content">
@@ -157,433 +143,903 @@ loginBtn.addEventListener("click", checkPassword);
   </div>
 </div>
 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <script>
-/* --- 1. Qo‘shimcha yordamchi funksiyalar --- */
-function getABC(index){ return String.fromCharCode(97 + index) + ") "; }
-function scrollToQuestion(index){
-    let q = document.getElementById("q_" + index);
-    if(!q) return;
-    document.querySelectorAll('.highlight-question').forEach(e=>e.classList.remove('highlight-question'));
-    q.classList.add('highlight-question');
-    q.scrollIntoView({behavior:"smooth", block:"center"});
+/* =========================
+   PAROL
+========================= */
+const passwordModal = document.getElementById("passwordModal");
+const passwordInput = document.getElementById("passwordInput");
+const loginBtn = document.getElementById("loginBtn");
+const passwordErrorDiv = document.getElementById("passwordError");
+
+function checkPassword(){
+  if(passwordInput.value === "9"){
+    passwordModal.style.display = "none";
+  }else{
+    passwordErrorDiv.innerText = "Parol noto‘g‘ri!";
+    passwordInput.value = "";
+    passwordErrorDiv.style.animation = "shake 0.5s";
+    passwordErrorDiv.addEventListener("animationend", ()=>{ passwordErrorDiv.style.animation = ""; }, {once:true});
+  }
+}
+passwordInput.addEventListener("keyup", (e)=>{ if(e.key==="Enter") loginBtn.click(); });
+loginBtn.addEventListener("click", checkPassword);
+
+/* =========================
+   HELPERS
+========================= */
+function getABC(i){ return String.fromCharCode(97 + i) + ") "; }
+
+function shuffleArray(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
-/* --- 2. Savol va javoblarni formatlash --- */
-function customFormat(text, index, numbering, abcMode, blockPrefix, firstPrefix, otherPrefix){
-    let lines = text.trim().split("\n");
-    if(lines.length === 0) return [];
-
-    let out = [];
-    let title = lines[0];
-    if(numbering === "yes") title = index + ". " + title;
-    out.push(blockPrefix + title);
-
-    for(let i=1; i<lines.length; i++){
-        let line = lines[i];
-        if(abcMode === "yes") line = getABC(i-1) + line;
-        let prefix = (i === 1 ? firstPrefix : otherPrefix);
-        out.push(prefix + line);
-    }
-    return out;
+function calculatePercent(count, total){
+  if(total === 0) return "0%";
+  return Math.round((count/total)*100) + "%";
 }
 
-/* --- 3. Bloklarga bo‘lish --- */
 function splitBlocks(text){
-    let lines = text.split("\n");
-    let blocks = [], current = [];
-
-    for(let i=0; i<lines.length; i++){
-        let line = lines[i].trim();
-        if(line === "") continue;
-        if(line.endsWith("?") && current.length > 0){ blocks.push(current); current = [line]; }
-        else current.push(line);
+  const lines = (text || "").split("\n");
+  const blocks = [];
+  let current = [];
+  for(let i=0;i<lines.length;i++){
+    const line = lines[i].trim();
+    if(line === "") continue;
+    if(line.endsWith("?") && current.length>0){
+      blocks.push(current);
+      current = [line];
+    }else{
+      current.push(line);
     }
-    if(current.length>0) blocks.push(current);
-    return blocks;
+  }
+  if(current.length>0) blocks.push(current);
+  return blocks;
 }
 
-/* --- 4. Kalit so‘zlarni aniqlash --- */
-function extractKeywords(blocks){
-    let keywordsMap = {};
-    for(let i=0; i<blocks.length; i++){
-        let firstAnswerI = blocks[i][1] ? blocks[i][1].split(/\s+/) : [];
-        for(let j=0; j<blocks.length; j++){
-            if(i===j) continue;
-            let firstAnswerJ = blocks[j][1] ? blocks[j][1].split(/\s+/) : [];
-            firstAnswerI.forEach(w1=>{
-                firstAnswerJ.forEach(w2=>{
-                    if(w1.toLowerCase()===w2.toLowerCase() && w1.length>2){
-                        if(!keywordsMap[i]) keywordsMap[i] = new Set();
-                        keywordsMap[i].add(w1);
-                    }
-                });
-            });
-        }
+function extractRepeatedAnswers(blocks){
+  const result = {};
+  blocks.forEach((blk,i)=>{
+    const answers = blk.slice(1);
+    const map = {};
+    answers.forEach((val,idx)=>{
+      const key = val.trim().toLowerCase();
+      if(map[key]) map[key].push(String.fromCharCode(97+idx));
+      else map[key] = [String.fromCharCode(97+idx)];
+    });
+    for(const k in map){
+      if(map[k].length>1){
+        if(!result[i]) result[i]=[];
+        result[i].push({letters:map[k], value:k});
+      }
     }
-    return keywordsMap;
+  });
+  return result;
+}
+
+/* ✅ Qo‘shilgan: savolga tez sakrash */
+function scrollToQuestion(index){
+  const q = document.getElementById("q_" + index);
+  if(!q) return;
+  document.querySelectorAll('.highlight-question').forEach(e=>e.classList.remove('highlight-question'));
+  q.classList.add('highlight-question');
+  q.scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+/* ✅ Qo‘shilgan: kalit so‘zlar */
+function extractKeywords(blocks){
+  const keywordsMap = {};
+  for(let i=0;i<blocks.length;i++){
+    const firstAnswerI = blocks[i][1] ? blocks[i][1].split(/\s+/) : [];
+    for(let j=0;j<blocks.length;j++){
+      if(i===j) continue;
+      const firstAnswerJ = blocks[j][1] ? blocks[j][1].split(/\s+/) : [];
+      firstAnswerI.forEach(w1=>{
+        firstAnswerJ.forEach(w2=>{
+          if(w1 && w2 && w1.toLowerCase()===w2.toLowerCase() && w1.length>2){
+            if(!keywordsMap[i]) keywordsMap[i] = new Set();
+            keywordsMap[i].add(w1);
+          }
+        });
+      });
+    }
+  }
+  return keywordsMap;
 }
 
 function buildKeywordSignatures(keywordsMap){
-    let sigMap = {};
-    for(let idx in keywordsMap){
-        let arr = Array.from(keywordsMap[idx]); 
-        if(arr.length === 0) continue;
-        // sort qilmaymiz, so‘zlarni qo‘lda kelgan tartibda saqlaymiz
-        let signature = arr.join(" "); // bo‘sh joy bilan ajratamiz
-        if(!sigMap[signature]) sigMap[signature] = { indices: [], words: arr };
-        sigMap[signature].indices.push(parseInt(idx)+1);
+  const sigMap = {};
+  for(const idx in keywordsMap){
+    const arr = Array.from(keywordsMap[idx]);
+    if(arr.length===0) continue;
+    const signature = arr.join(" "); // bo‘sh joy bilan
+    if(!sigMap[signature]) sigMap[signature] = { indices: [], words: arr };
+    sigMap[signature].indices.push(parseInt(idx,10)+1);
+  }
+  return sigMap;
+}
+
+/* =========================
+   FORMAT (modal)
+========================= */
+function customFormat(text, index, numbering, abcMode, blockPrefix, firstPrefix, otherPrefix, correctAnswerText){
+  const lines = (text || "").trim().split("\n");
+  if(lines.length===0) return [];
+  const out = [];
+
+  let title = lines[0];
+  if(numbering==="yes") title = index + ". " + title;
+  out.push(blockPrefix + title);
+
+  for(let i=1;i<lines.length;i++){
+    let line = lines[i];
+    if(abcMode==="yes") line = getABC(i-1) + line;
+
+    let prefix = otherPrefix;
+    if(typeof correctAnswerText==="string" && correctAnswerText.length>0){
+      if(lines[i].trim() === correctAnswerText.trim()) prefix = firstPrefix;
+    }else{
+      prefix = (i===1 ? firstPrefix : otherPrefix);
     }
-    return sigMap;
+    out.push(prefix + line);
+  }
+  return out;
 }
 
-/* --- 6. Takror javoblarni aniqlash --- */
-function extractRepeatedAnswers(blocks){
-    let result = {};
-    blocks.forEach((blk,i)=>{
-        let answers = blk.slice(1);
-        let map = {};
-        answers.forEach((val,index)=>{
-            let key = val.trim().toLowerCase();
-            if(map[key]) map[key].push(String.fromCharCode(97+index));
-            else map[key] = [String.fromCharCode(97+index)];
-        });
-        for(let key in map){
-            if(map[key].length > 1){
-                if(!result[i]) result[i] = [];
-                result[i].push({letters:map[key], value:key});
-            }
-        }
-    });
-    return result;
-}
-
-/* --- 7. Foiz hisoblash --- */
-function calculatePercent(count, total){
-    if(total === 0) return "0%";
-    return Math.round((count/total)*100) + "%";
-}
-
-
-
+/* =========================
+   SHOW RESULT (modal)  ✅ TUZATILDI (VARIANT HEADERLAR UCHUN)
+========================= */
 function showResult(){
-    // 1️⃣ Inputni olish va sozlamalarni belgilash
-    let input = document.getElementById("inputText").value.trim();
-    let numbering = document.getElementById("numbering").value; // raqamlash
-    let abcMode = document.getElementById("abcMode").value;     // a, b, c…
-    let addEnter = document.getElementById("addEnter").value;   // savollar orasida bo‘sh qator
-    let blockPrefix = document.getElementById("blockPrefix").value;
-    let firstPrefix = document.getElementById("firstPrefix").value;
-    let otherPrefix = document.getElementById("otherPrefix").value;
+  const input = document.getElementById("inputText").value.trim();
+  const numbering = document.getElementById("numbering").value;
+  const abcMode = document.getElementById("abcMode").value;
+  const addEnter = document.getElementById("addEnter").value;
+  const randomizeQuestions = document.getElementById("randomizeQuestions").value;
+  const randomizeAnswers = document.getElementById("randomizeAnswers").value;
+  const blockPrefix = document.getElementById("blockPrefix").value;
+  const firstPrefix = document.getElementById("firstPrefix").value;
+  const otherPrefix = document.getElementById("otherPrefix").value;
 
-    // 2️⃣ Savollarni bloklarga ajratish
-    let blocks = splitBlocks(input);
-    let modalDiv = document.getElementById("modalText");
-    modalDiv.innerHTML = ""; // avvalgi natijani tozalash
+  let blocks = splitBlocks(input);
 
-    // 3️⃣ Turli tahlillar uchun massivlar
-    let fewAnswer = [];   // 4 tadan kam javob
-    let manyAnswer = [];  // 4 tadan ko‘p javob
-    let longAnswer = [];  // uzun javob (4+)
+  // ✅ VARIANT header aniqlash: "VARIANT 1", "Variant 2" va h.k.
+  const isVariantHeader = (blk)=> blk && blk.length===1 && /^VARIANT\s+\d+/i.test((blk[0]||"").trim());
 
-    // 4️⃣ Savollar va javoblarni modalga chiqarish
-    blocks.forEach((blk,i)=>{
-        // 4.1 Formatlash
-        let formatted = customFormat(
-            blk.join("\n"), 
-            i+1, 
-            numbering, abcMode, 
-            blockPrefix, firstPrefix, otherPrefix
-        );
+  // ✅ savollarni aralashtirish faqat "savol" bloklariga
+  if(randomizeQuestions==="yes"){
+    const headers = blocks.filter(isVariantHeader);
+    const questions = blocks.filter(b=>!isVariantHeader(b));
+    shuffleArray(questions);
+    // header bo‘lmasa oddiy ishlaydi, header bo‘lsa ham aralashmaydi
+    blocks = headers.length ? [...headers, ...questions] : questions;
+  }
 
-        // 4.2 Savolni qo‘shish
-        let qDiv = document.createElement("div");
-        qDiv.className = "question";
-        qDiv.id = "q_" + (i+1);
-        qDiv.innerHTML = formatted[0];
-        modalDiv.appendChild(qDiv);
+  // to‘g‘ri javob (1-variant) ni saqlab qolish
+  const correctMap = {};
+  blocks.forEach((blk,i)=>{
+    correctMap[i] = (blk[1] ? blk[1] : "");
+    if(!isVariantHeader(blk) && randomizeAnswers==="yes" && blk.length>2){
+      const answers = blk.slice(1);
+      shuffleArray(answers);
+      blocks[i] = [blk[0], ...answers];
+    }
+  });
 
-        // 4.3 Javoblarni qo‘shish
-        for(let j=1; j<formatted.length; j++){
-            let aDiv = document.createElement("div");
-            aDiv.className = "answer";
-            aDiv.innerHTML = formatted[j];
-            modalDiv.appendChild(aDiv);
-        }
+  const modalDiv = document.getElementById("modalText");
+  modalDiv.innerHTML = "";
 
-        // 4.4 Bo‘sh qator qo‘yish (agar kerak bo‘lsa)
-        if(addEnter === "yes" && i != blocks.length-1)
-            modalDiv.appendChild(document.createElement("br"));
+  // tahlil massivlari
+  const fewAnswer = [];
+  const manyAnswer = [];
+  const longAnswer = [];
 
-        // 4.5 Javoblar soni bo‘yicha tahlil
-        let numAnswers = blk.length - 1;
-        if(numAnswers < 4) fewAnswer.push({text:(i+1)+". savol: "+blk[0], index:(i+1)});
-        if(numAnswers > 4) manyAnswer.push({text:(i+1)+". savol: "+blk[0], index:(i+1)});
-        if(numAnswers >= 4) longAnswer.push({text:(i+1)+". savol", index:(i+1)});
-    });
+  // ✅ savol raqamlash 1 dan boshlansin (VARIANT header hisoblanmaydi)
+  let qCounter = 0;
 
-    // 9️⃣ Takror savollar
-    let questionMap = {};
-    blocks.forEach((blk, index)=>{
-        let qText = blk[0].trim();
-        if(questionMap[qText]) questionMap[qText].push(index+1);
-        else questionMap[qText] = [index+1];
-    });
-    let repeatedQuestions = [];
-    for(let q in questionMap){ if(questionMap[q].length > 1) repeatedQuestions.push(questionMap[q]); }
+  // ✅ tahlillar faqat savollarga ishlasin:
+  const onlyQuestions = blocks.filter(b=>!isVariantHeader(b));
 
-    if(repeatedQuestions.length>0){
-        let div = document.createElement("div");
-        div.innerHTML = "<strong>Takror savollar:</strong><br>";
-        repeatedQuestions.forEach(item=>{
-            let nums = item.map(n=>`<span class='clickable-error' onclick='scrollToQuestion(${n})'>${n}</span>`).join(", ");
-            div.innerHTML += nums + "<br>";
-        });
-        modalDiv.appendChild(div);
+  // natijani chiqarish
+  blocks.forEach((blk,i)=>{
+
+    // ✅ VARIANT header bo‘lsa: ++++ ham, raqam ham qo‘shilmaydi
+    if(isVariantHeader(blk)){
+      const h = document.createElement("div");
+      h.className = "question";
+      h.style.fontWeight = "700";
+      h.style.background = "#dbeafe";
+      h.innerHTML = blk[0]; // "VARIANT 1"
+      modalDiv.appendChild(h);
+      if(addEnter==="yes") modalDiv.appendChild(document.createElement("br"));
+      return;
     }
 
-    // 5️⃣ Takror javoblarni aniqlash
-let repeatedAnswers = extractRepeatedAnswers(blocks);
-if(Object.keys(repeatedAnswers).length > 0){
-    let div = document.createElement("div");
+    qCounter++;
+
+    const formatted = customFormat(
+      blk.join("\n"),
+      qCounter,
+      numbering, abcMode,
+      blockPrefix, firstPrefix, otherPrefix,
+      correctMap[i]
+    );
+
+    const qDiv = document.createElement("div");
+    qDiv.className = "question";
+    qDiv.id = "q_" + qCounter;   // ✅ endi toza savol raqami
+    qDiv.innerHTML = formatted[0];
+    modalDiv.appendChild(qDiv);
+
+    for(let j=1;j<formatted.length;j++){
+      const aDiv = document.createElement("div");
+      aDiv.className = "answer";
+      aDiv.innerHTML = formatted[j];
+      modalDiv.appendChild(aDiv);
+    }
+
+    if(addEnter==="yes") modalDiv.appendChild(document.createElement("br"));
+
+    const numAnswers = blk.length - 1;
+    if(numAnswers < 4) fewAnswer.push({index:qCounter});
+    if(numAnswers > 4) manyAnswer.push({index:qCounter});
+    if(numAnswers >= 4) longAnswer.push({index:qCounter});
+  });
+
+  /* ✅ Takror savollar (faqat savollar bo‘yicha) */
+  const questionMap = {};
+  onlyQuestions.forEach((blk, idx)=>{
+    const qText = (blk[0] || "").trim();
+    if(!qText) return;
+    const qNo = idx + 1;
+    if(questionMap[qText]) questionMap[qText].push(qNo);
+    else questionMap[qText] = [qNo];
+  });
+  const repeatedQuestions = [];
+  for(const q in questionMap){
+    if(questionMap[q].length>1) repeatedQuestions.push(questionMap[q]);
+  }
+
+  if(repeatedQuestions.length>0){
+    const div = document.createElement("div");
+    div.style.marginTop = "10px";
+    div.innerHTML = "<strong>Takror savollar:</strong><br>";
+    repeatedQuestions.forEach(arr=>{
+      const nums = arr.map(n=>`<span class="clickable-error" onclick="scrollToQuestion(${n})">${n}</span>`).join(", ");
+      div.innerHTML += nums + "<br>";
+    });
+    modalDiv.appendChild(div);
+  }
+
+  /* ✅ Takror javoblar (faqat savollar bo‘yicha) */
+  const repeatedAnswers = extractRepeatedAnswers(onlyQuestions);
+  if(Object.keys(repeatedAnswers).length>0){
+    const div = document.createElement("div");
+    div.style.marginTop = "10px";
     div.innerHTML = "<strong>Takror javoblar:</strong><br>";
-    
-    // Har bir savol bo‘yicha
-    for(let idx in repeatedAnswers){
-        repeatedAnswers[idx].forEach(obj=>{
-            // Raqam (variantlar) shaklida ko‘rsatish
-            let span = document.createElement("span");
-            span.className = "clickable-error";
-            span.innerText = `${parseInt(idx)+1} (${obj.letters.join(" va ")}); `;
-            span.onclick = ()=>{ scrollToQuestion(parseInt(idx)+1); };
-            div.appendChild(span);
-        });
+    for(const idx in repeatedAnswers){
+      repeatedAnswers[idx].forEach(obj=>{
+        const span = document.createElement("span");
+        span.className = "clickable-error";
+        span.innerText = `${parseInt(idx,10)+1} (${obj.letters.join(" va ")}); `;
+        span.onclick = ()=>scrollToQuestion(parseInt(idx,10)+1);
+        div.appendChild(span);
+      });
     }
     modalDiv.appendChild(div);
-}
+  }
 
-
-   // 6️⃣ 4 tadan kam javobli savollar
-if(fewAnswer.length>0){
-    let div = document.createElement("div");
-    div.innerHTML = "<strong>4 tadan kam javobli savollar:</strong><br>";
-    
-    fewAnswer.forEach((item, idx) => {
-        let span = document.createElement("span");
-        span.className = "clickable-error";
-        span.innerText = item.index;
-        span.onclick = () => scrollToQuestion(item.index);
-        div.appendChild(span);
-
-        if(idx !== fewAnswer.length - 1) div.appendChild(document.createTextNode("; "));
-        else div.appendChild(document.createTextNode(";"));
+  /* 4 tadan kam/ko‘p/uzun javobli savollar — clickable */
+  function appendIndexList(title, arr){
+    if(!arr || arr.length===0) return;
+    const div = document.createElement("div");
+    div.style.marginTop = "10px";
+    div.innerHTML = "<strong>" + title + "</strong><br>";
+    arr.forEach((item, idx)=>{
+      const span = document.createElement("span");
+      span.className = "clickable-error";
+      span.innerText = item.index;
+      span.onclick = ()=>scrollToQuestion(item.index);
+      div.appendChild(span);
+      div.appendChild(document.createTextNode(idx===arr.length-1 ? ";" : "; "));
     });
-
     modalDiv.appendChild(div);
-}
+  }
 
-// 7️⃣ 4 tadan ko‘p javobli savollar
-if(manyAnswer.length>0){
-    let div = document.createElement("div");
-    div.innerHTML = "<strong>4 tadan ko‘p javobli savollar:</strong><br>";
+  appendIndexList("4 tadan kam javobli savollar:", fewAnswer);
+  appendIndexList("4 tadan ko‘p javobli savollar:", manyAnswer);
+  appendIndexList("Uzun javobli savollar:", longAnswer);
 
-    manyAnswer.forEach((item, idx) => {
-        let span = document.createElement("span");
-        span.className = "clickable-error";
-        span.innerText = item.index;
-        span.onclick = () => scrollToQuestion(item.index);
-        div.appendChild(span);
+  /* Kalit so‘zlar (faqat savollar bo‘yicha) */
+  const keywordsMap = extractKeywords(onlyQuestions);
+  const sigMap = buildKeywordSignatures(keywordsMap);
+  let kwCount = 0;
 
-        if(idx !== manyAnswer.length - 1) div.appendChild(document.createTextNode("; "));
-        else div.appendChild(document.createTextNode(";"));
-    });
+  if(Object.keys(sigMap).length>0){
+    const groups = Object.keys(sigMap).map(sig=>{
+      const arr = sigMap[sig].indices.slice().sort((a,b)=>a-b);
+      return { signature:sig, indices:arr, words:sigMap[sig].words, minIndex:arr[0] };
+    }).sort((a,b)=>a.minIndex-b.minIndex);
 
-    modalDiv.appendChild(div);
-}
-
-
-   // 8️⃣ Uzun javobli savollar
-if(longAnswer.length>0){
-    let div = document.createElement("div");
-    div.innerHTML = "<strong>Uzun javobli savollar:</strong><br>";
-
-    // Raqamlarni nuqta-vergul bilan chiqaramiz, clickable qilamiz
-    longAnswer.forEach((item, idx) => {
-        let span = document.createElement("span");
-        span.className = "clickable-error";
-        span.innerText = item.index;
-        span.onclick = () => scrollToQuestion(item.index);
-        div.appendChild(span);
-
-        // Oxirgi raqamdan keyin nuqta-vergul qo‘ymaymiz
-        if(idx !== longAnswer.length - 1) div.appendChild(document.createTextNode("; "));
-        else div.appendChild(document.createTextNode(";"));
-    });
-
-    modalDiv.appendChild(div);
-}
-
-
-
-    
-
-// 🔟 Kalit so‘zlar aniqlangan javoblar (guruhlangan)
-let keywordsMap = extractKeywords(blocks);
-let sigMap = buildKeywordSignatures(keywordsMap);
-
-let kwCount = 0;
-if(Object.keys(sigMap).length > 0){
-    let groups = Object.keys(sigMap).map(sig=>{
-        let arr = sigMap[sig].indices.slice().sort((a,b)=>a-b);
-        return { signature: sig, indices: arr, words: sigMap[sig].words, minIndex: arr[0] };
-    });
-    groups.sort((a,b)=> a.minIndex - b.minIndex);
-
-    let kwDiv = document.createElement("div");
-    kwDiv.id="keywordDiv";
-    kwDiv.innerHTML = "<strong>Kalit so'zlar aniqlangan javoblar (guruhlangan):</strong><br>";
-
+    const kwDiv = document.createElement("div");
+    kwDiv.style.marginTop = "10px";
+    kwDiv.innerHTML = "<strong>Kalit so‘zlar aniqlangan javoblar (guruhlangan):</strong><br>";
     groups.forEach(g=>{
-        // Raqamlarni nuqta-vergul bilan birlashtiramiz
-        let indicesStr = g.indices.join("; ");
-        let wordsStr = g.words.join(" ");  // <-- bu yerda vergul o‘rniga bo‘sh joy
-        let span = document.createElement("span");
-        span.className = "clickable-error";
-        span.innerHTML = indicesStr + "; " + wordsStr;
-        span.onclick = ()=>{ scrollToQuestion(g.indices[0]); };
-        kwDiv.appendChild(span);
-        kwDiv.appendChild(document.createElement("br"));
-        kwCount++;
+      const indicesStr = g.indices.join("; ");
+      const wordsStr = g.words.join(" ");
+      const span = document.createElement("span");
+      span.className = "clickable-error";
+      span.innerHTML = indicesStr + "; " + "<span class='keyword'>" + wordsStr + "</span>";
+      span.onclick = ()=>scrollToQuestion(g.indices[0]);
+      kwDiv.appendChild(span);
+      kwDiv.appendChild(document.createElement("br"));
+      kwCount++;
     });
     modalDiv.appendChild(kwDiv);
-}
+  }
 
+  /* Kichik/bosh harflar shubhali (faqat savollar bo‘yicha) */
+  const suspicious = [];
+  onlyQuestions.forEach((blk,i)=>{
+    if(blk.length < 2) return;
+    const answers = blk.slice(1).filter(Boolean);
+    if(answers.length===0) return;
 
-
-    // 1️⃣1️⃣ Kichik/bosh harflar tufayli shubhali javoblar
-    let suspicious = [];
-    blocks.forEach((blk,i)=>{
-        if(blk.length < 2) return;
-        let answers = blk.slice(1);
-        let firstAnswer = answers[0];
-        let countUpper = 0, countLower = 0;
-        answers.forEach(a=>{
-            if(a[0] === a[0].toUpperCase()) countUpper++;
-            else countLower++;
-        });
-        let isSuspicious = false;
-        if(countUpper === answers.length) isSuspicious = false;
-        else if(
-            (firstAnswer[0] === firstAnswer[0].toUpperCase() && countLower >= 3) ||
-            (firstAnswer[0] === firstAnswer[0].toLowerCase() && countUpper === answers.length-1) ||
-            (countUpper === 2 && countLower === 2)
-        ) isSuspicious = true;
-        if(isSuspicious) suspicious.push({text:(i+1)+". savоl: "+blk[0], index:(i+1)});
+    const firstAnswer = answers[0];
+    let countUpper = 0, countLower = 0;
+    answers.forEach(a=>{
+      if(!a || !a[0]) return;
+      if(a[0] === a[0].toUpperCase()) countUpper++;
+      else countLower++;
     });
 
-    let suspiciousCount = suspicious.length;
-    if(suspiciousCount>0){
-        let susDiv = document.createElement("div");
-        susDiv.innerHTML = "<strong>Kichik/bosh harflar tufayli shubhali javoblar:</strong><br>";
-        susDiv.style.color = "orange";
-        suspicious.forEach(item=>{
-            susDiv.innerHTML += `<span class='clickable-error' onclick='scrollToQuestion(${item.index})'>${item.text}</span><br>`;
-        });
-        modalDiv.appendChild(susDiv);
-    }
+    let isSuspicious = false;
+    if(countUpper === answers.length) isSuspicious = false;
+    else if(
+      (firstAnswer[0] === firstAnswer[0].toUpperCase() && countLower >= 3) ||
+      (firstAnswer[0] === firstAnswer[0].toLowerCase() && countUpper === answers.length-1) ||
+      (countUpper === 2 && countLower === 2)
+    ) isSuspicious = true;
 
-    // 1️⃣2️⃣ Foizlarni hisoblash va chiqarish
-    let totalQuestions = blocks.length;
-    let repeatedQuestionsCount = repeatedQuestions.length;
-    let fewAnswerCount = fewAnswer.length;
-    let manyAnswerCount = manyAnswer.length;
-    let longAnswerCount = longAnswer.length;
-    let repeatedAnswersCount = Object.keys(repeatedAnswers).length;
+    if(isSuspicious) suspicious.push({index:i+1, text:(i+1)+". savol: "+blk[0]});
+  });
 
-    let percentDiv = document.createElement("div");
-    percentDiv.style.marginTop = "20px";
-    percentDiv.style.padding = "12px";
-    percentDiv.style.background = "#e9f7ef"; 
-    percentDiv.style.border = "1px solid #c7e6d1";
-    percentDiv.style.borderRadius = "10px";
-    percentDiv.style.color = "#333"; 
+  if(suspicious.length>0){
+    const susDiv = document.createElement("div");
+    susDiv.style.marginTop = "10px";
+    susDiv.style.color = "orange";
+    susDiv.innerHTML = "<strong>Kichik/bosh harflar tufayli shubhali javoblar:</strong><br>";
+    suspicious.forEach(item=>{
+      susDiv.innerHTML += `<span class="clickable-error" onclick="scrollToQuestion(${item.index})">${item.text}</span><br>`;
+    });
+    modalDiv.appendChild(susDiv);
+  }
 
-    percentDiv.innerHTML = "<strong>Statistik Foizlar:</strong><br><br>" +
-       "Savollar soni: " + totalQuestions + "/100%<br><br>" +
+  /* Statistik foizlar (faqat savollar bo‘yicha) */
+  const totalQuestions = onlyQuestions.length;
+  const repeatedQuestionsCount = repeatedQuestions.length;
+  const fewAnswerCount = fewAnswer.length;
+  const manyAnswerCount = manyAnswer.length;
+  const longAnswerCount = longAnswer.length;
+  const repeatedAnswersCount = Object.keys(repeatedAnswers).length;
+  const suspiciousCount = suspicious.length;
+
+  const percentDiv = document.createElement("div");
+  percentDiv.style.marginTop = "20px";
+  percentDiv.style.padding = "12px";
+  percentDiv.style.background = "#e9f7ef";
+  percentDiv.style.border = "1px solid #c7e6d1";
+  percentDiv.style.borderRadius = "10px";
+  percentDiv.style.color = "#333";
+  percentDiv.innerHTML =
+    "<strong>Statistik Foizlar:</strong><br><br>" +
+    "Savollar soni: " + totalQuestions + "/100%<br><br>" +
     "• Takrorlangan savollar: " + repeatedQuestionsCount + "/" + calculatePercent(repeatedQuestionsCount, totalQuestions) + "<br>" +
     "• 4 tadan kam javoblar: " + fewAnswerCount + "/" + calculatePercent(fewAnswerCount, totalQuestions) + "<br>" +
     "• 4 tadan ko‘p javoblar: " + manyAnswerCount + "/" + calculatePercent(manyAnswerCount, totalQuestions) + "<br>" +
     "• Uzun javobli savollar: " + longAnswerCount + "/" + calculatePercent(longAnswerCount, totalQuestions) + "<br>" +
-    "• Kalit so'zlar aniqlangan javoblar (guruhlangan): " + kwCount + "/" + calculatePercent(kwCount, totalQuestions) + "<br>" +
+    "• Kalit so‘zlar aniqlangan javoblar (guruhlangan): " + kwCount + "/" + calculatePercent(kwCount, totalQuestions) + "<br>" +
     "• Takror javoblar aniqlangan: " + repeatedAnswersCount + "/" + calculatePercent(repeatedAnswersCount, totalQuestions) + "<br>" +
     "• Kichik/bosh harflar tufayli shubhali javoblar: " + suspiciousCount + "/" + calculatePercent(suspiciousCount, totalQuestions) + "<br>";
+  modalDiv.appendChild(percentDiv);
 
-    modalDiv.appendChild(percentDiv);
-
-    // 1️⃣3️⃣ Modalni ko‘rsatish
-    document.getElementById("resultModal").style.display = "block";
+  document.getElementById("resultModal").style.display = "block";
 }
 
-
-/* --- 8. Yuklab olish funktsiyasi --- */
+/* =========================
+   DOWNLOAD RESULT
+========================= */
 function downloadResult(format){
-    let modalDiv = document.getElementById("modalText");
-    if(!modalDiv.innerHTML.trim()){ alert("Natija mavjud emas!"); return; }
+  const modalDiv = document.getElementById("modalText");
+  if(!modalDiv.innerHTML.trim()){ alert("Natija mavjud emas!"); return; }
 
-    if(format === 'txt'){
-        let lines = [];
-        modalDiv.querySelectorAll(".question, .answer").forEach(el=>{ if(el.innerText.trim()!=="") lines.push(el.innerText.trim()); });
-        let blob = new Blob([lines.join("\n")], { type:"text/plain;charset=utf-8" });
-        let link = document.createElement("a"); 
-        link.href = URL.createObjectURL(blob);
-        link.download = "natija.txt"; 
-        link.click();
-    }
-    else if(format === 'doc'){
-        let docHtml = "<html><head><meta charset='UTF-8'></head><body>" + modalDiv.innerHTML + "</body></html>";
-        let blob = new Blob([docHtml], { type:"application/msword" });
-        let link = document.createElement("a"); 
-        link.href = URL.createObjectURL(blob);
-        link.download = "natija.doc"; 
-        link.click();
-    }
-    else if(format === 'xlsx'){
-        let wb = XLSX.utils.book_new(); 
-        let rows = [];
-        modalDiv.querySelectorAll(".question, .answer").forEach(el=>{ if(el.innerText.trim()!=="") rows.push([el.innerText.trim()]); });
-        XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), "Natija");
-        XLSX.writeFile(wb, "natija.xlsx");
-    }
+  if(format==="txt"){
+    const lines = [];
+    modalDiv.querySelectorAll(".question,.answer").forEach(el=>{
+      if(el.innerText.trim()!=="") lines.push(el.innerText.trim());
+    });
+    const blob = new Blob([lines.join("\n")], {type:"text/plain;charset=utf-8"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "natija.txt";
+    a.click();
+  }else if(format==="doc"){
+    const docHtml = "<html><head><meta charset='UTF-8'></head><body>" + modalDiv.innerHTML + "</body></html>";
+    const blob = new Blob([docHtml], {type:"application/msword"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "natija.doc";
+    a.click();
+  }else if(format==="xlsx"){
+    const wb = XLSX.utils.book_new();
+    const rows = [];
+    modalDiv.querySelectorAll(".question,.answer").forEach(el=>{
+      if(el.innerText.trim()!=="") rows.push([el.innerText.trim()]);
+    });
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), "Natija");
+    XLSX.writeFile(wb, "natija.xlsx");
+  }
 }
 
-/* --- 9. Modal yopish --- */
 function closeModal(){ document.getElementById("resultModal").style.display = "none"; }
-window.onclick = function(event){ if(event.target == document.getElementById("resultModal")) closeModal(); }
+window.onclick = function(event){
+  if(event.target === document.getElementById("resultModal")) closeModal();
+};
+
+/* =========================
+   VARIANT GENERATOR
+========================= */
+function buildOneQuestionText(questionText, answers, qNo, abcMode, blockPrefix, firstPrefix, otherPrefix, correctAnswerText){
+  const out = [];
+  const numbering = document.getElementById("numbering").value;
+
+  if(numbering==="yes") out.push(blockPrefix + qNo + ". " + questionText);
+  else out.push(blockPrefix + questionText);
+
+  for(let i=0;i<answers.length;i++){
+    const ans = answers[i];
+    let shown = ans;
+    if(abcMode==="yes") shown = getABC(i) + ans;
+
+    let prefix = otherPrefix;
+    if(typeof correctAnswerText==="string" && correctAnswerText.length>0){
+      if(ans.trim()===correctAnswerText.trim()) prefix = firstPrefix;
+    }else{
+      prefix = (i===0 ? firstPrefix : otherPrefix);
+    }
+    out.push(prefix + shown);
+  }
+  return out.join("\n");
+}
+
+function generateVariants(){
+  const input = document.getElementById("inputText").value.trim();
+  const abcMode = document.getElementById("abcMode").value;
+  const addEnter = document.getElementById("addEnter").value;
+  const randomizeQuestions = document.getElementById("randomizeQuestions").value;
+  const randomizeAnswers = document.getElementById("randomizeAnswers").value;
+
+  const blockPrefix = document.getElementById("blockPrefix").value;
+  const firstPrefix = document.getElementById("firstPrefix").value;
+  const otherPrefix = document.getElementById("otherPrefix").value;
+
+  const variantCount = parseInt(document.getElementById("variantCount").value || "0", 10);
+  const perVariant = parseInt(document.getElementById("perVariant").value || "0", 10);
+
+  const blocks = splitBlocks(input);
+  const n = blocks.length;
+
+  if(n===0){
+    document.getElementById("variantOutput").value = "Savollar topilmadi. Matnni tekshiring.";
+    buildAnswerKeyFromVariantOutput();
+    return;
+  }
+
+  const k = (perVariant===0) ? n : Math.min(perVariant, n);
+  const originals = blocks.map(blk => (blk[1] ? blk[1] : ""));
+
+  const out = [];
+
+  if(variantCount===0){
+    out.push("VARIANT 1");
+    if(addEnter==="yes") out.push("");
+
+    let idx = Array.from({length:n},(_,i)=>i);
+    if(randomizeQuestions==="yes") shuffleArray(idx);
+
+    let qNo = 0;
+    for(let i=0;i<k;i++){
+      const bi = idx[i];
+      const blk = blocks[bi];
+
+      const answers = blk.slice(1);
+      if(randomizeAnswers==="yes") shuffleArray(answers);
+
+      qNo++;
+      out.push(buildOneQuestionText(blk[0], answers, qNo, abcMode, blockPrefix, firstPrefix, otherPrefix, originals[bi]));
+      if(addEnter==="yes") out.push("");
+    }
+
+    out.push("");
+    out.push("===== UMUMIY HISOBOT =====");
+    out.push("Savollar soni: " + k);
+    out.push("Variantlar soni: 1 (to‘liq ro‘yxat)");
+
+    document.getElementById("variantOutput").value = out.join("\n").trim() + "\n";
+    buildAnswerKeyFromVariantOutput();
+    return;
+  }
+
+  for(let v=1; v<=variantCount; v++){
+    out.push("VARIANT " + v);
+    if(addEnter==="yes") out.push("");
+
+    let idx = Array.from({length:n},(_,i)=>i);
+    if(randomizeQuestions==="yes") shuffleArray(idx);
+
+    let qNo = 0;
+    for(let i=0;i<k;i++){
+      const bi = idx[i];
+      const blk = blocks[bi];
+
+      const answers = blk.slice(1);
+      if(randomizeAnswers==="yes") shuffleArray(answers);
+
+      qNo++;
+      out.push(buildOneQuestionText(blk[0], answers, qNo, abcMode, blockPrefix, firstPrefix, otherPrefix, originals[bi]));
+      if(addEnter==="yes") out.push("");
+    }
+
+    if(addEnter==="yes") out.push("");
+  }
+
+  out.push("===== UMUMIY HISOBOT =====");
+  out.push("Jami variantlar: " + variantCount);
+  out.push("Har bir variant savollari: " + k);
+
+  document.getElementById("variantOutput").value = out.join("\n").trim() + "\n";
+  buildAnswerKeyFromVariantOutput();
+}
+
+async function copyVariantOutput(){
+  const t = document.getElementById("variantOutput").value || "";
+  if(!t.trim()){ alert("Natija yo‘q"); return; }
+  try{
+    await navigator.clipboard.writeText(t);
+    alert("Nusxa olindi");
+  }catch(e){
+    alert("Clipboard ishlamadi. Qo‘lda belgilang va Ctrl+C qiling.");
+  }
+}
+
+/* =========================
+   ANSWER KEY TABLE
+========================= */
+let __lastAnswerKeyHTML = "";
+
+function parseAnswerKeyFromText(text){
+  const blockPrefix = (document.getElementById("blockPrefix").value || "++++");
+  const firstPrefix = (document.getElementById("firstPrefix").value || "====#");
+  const lines = (text || "").replace(/\r\n/g,"\n").split("\n");
+
+  const variants = [];
+  let currentVariant = null;
+  let inQuestion = false;
+  let currentAnswers = 0;
+  let gotCorrectIndex = -1;
+
+  function flushQuestion(){
+    if(!inQuestion) return;
+
+    let letter = "";
+    if(gotCorrectIndex >= 0) letter = String.fromCharCode(97 + gotCorrectIndex);
+
+    if(currentVariant === null) currentVariant = 1;
+
+    let vObj = variants.find(x=>x.v===currentVariant);
+    if(!vObj){
+      vObj = { v: currentVariant, keys: [] };
+      variants.push(vObj);
+    }
+    vObj.keys.push(letter);
+
+    inQuestion = false;
+    currentAnswers = 0;
+    gotCorrectIndex = -1;
+  }
+
+  function flushVariant(){ flushQuestion(); }
+
+  for(const raw of lines){
+    const line = (raw || "").trimEnd();
+
+    const mVar = line.match(/^VARIANT\s*(\d+)/i);
+    if(mVar){
+      flushVariant();
+      currentVariant = parseInt(mVar[1], 10);
+      continue;
+    }
+
+    if(line.trim()===""){
+      flushQuestion();
+      continue;
+    }
+
+    if(line.startsWith(blockPrefix)){
+      flushQuestion();
+      inQuestion = true;
+      currentAnswers = 0;
+      gotCorrectIndex = -1;
+      continue;
+    }
+
+    if(inQuestion){
+      if(line.startsWith(firstPrefix)){
+        gotCorrectIndex = currentAnswers;
+        currentAnswers++;
+        continue;
+      }
+      if(line.startsWith("====")){
+        currentAnswers++;
+        continue;
+      }
+    }
+  }
+
+  flushVariant();
+  variants.sort((a,b)=>a.v-b.v);
+  return variants;
+}
+
+function buildOneBigAnswerKeyTableHTML(variants){
+  if(!variants || variants.length===0){
+    return "<div style='color:#856404;background:#fff3cd;border:1px solid #ffeeba;padding:12px;border-radius:8px;'>Variantlar hali yasalmagan.</div>";
+  }
+
+  let maxQ = 0;
+  variants.forEach(v=>{ if(v.keys.length>maxQ) maxQ=v.keys.length; });
+  if(maxQ===0) maxQ=1;
+
+  let html = "<table class='keyTableOne'>";
+  variants.forEach(v=>{
+    html += "<tr><th class='keyVariantTitle' colspan='"+maxQ+"'>" + v.v + "-variant</th></tr>";
+    html += "<tr>";
+    for(let i=1;i<=maxQ;i++) html += "<td>"+i+"</td>";
+    html += "</tr>";
+    html += "<tr>";
+    for(let i=0;i<maxQ;i++) html += "<td>"+(v.keys[i] || "")+"</td>";
+    html += "</tr>";
+  });
+  html += "</table>";
+  return html;
+}
+
+function buildAnswerKeyFromVariantOutput(){
+  const txt = document.getElementById("variantOutput").value || "";
+  if(!txt.trim()){
+    document.getElementById("answerKeyWrap").innerHTML =
+      "<div style='color:#856404;background:#fff3cd;border:1px solid #ffeeba;padding:12px;border-radius:8px;'>Variantlar hali yasalmagan.</div>";
+    __lastAnswerKeyHTML = "";
+    return;
+  }
+  const variants = parseAnswerKeyFromText(txt);
+  const html = buildOneBigAnswerKeyTableHTML(variants);
+  document.getElementById("answerKeyWrap").innerHTML = html;
+  __lastAnswerKeyHTML = html;
+}
+
+/* =========================
+   WORD: ANSWER KEY (A4 LANDSCAPE)
+========================= */
+function getAnswerKeyExportHTML(htmlTable){
+  const msoStyle = `
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:Zoom>100</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+@page Section1{
+  size: 841.89pt 595.28pt;
+  mso-page-orientation: landscape;
+  margin: 20mm 12mm 20mm 12mm;
+}
+div.Section1{ page: Section1; }
+body{font-family:Segoe UI, Arial, sans-serif;}
+.keyTableOne{width:100%;border-collapse:collapse;table-layout:fixed;}
+.keyTableOne th,.keyTableOne td{border:1px solid #333;padding:4px 0;text-align:center;font-size:12px;}
+.keyVariantTitle{font-weight:700;background:#fff;}
+</style>`;
+  return `<!doctype html><html><head><meta charset="utf-8">${msoStyle}</head><body><div class="Section1">${htmlTable || ""}</div></body></html>`;
+}
+
+function downloadKeyTableAsWord(htmlTable, filename="togri_javoblar_A4_ALBOM.doc"){
+  const hasTable = /<table[\s>]/i.test(htmlTable || "");
+  if(!hasTable){ alert("Jadval topilmadi. Avval jadvalni chiqarib oling."); return; }
+
+  const htmlDoc = getAnswerKeyExportHTML(htmlTable);
+  const blob = new Blob([htmlDoc], {type:"application/msword"});
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+}
+
+function downloadAnswerKeyWord(){
+  if(!__lastAnswerKeyHTML || !/<table/i.test(__lastAnswerKeyHTML)){
+    buildAnswerKeyFromVariantOutput();
+  }
+  downloadKeyTableAsWord(__lastAnswerKeyHTML, "togri_javoblar_A4_ALBOM.doc");
+}
+
+/* =========================
+   STUDENT WORD
+========================= */
+function buildStudentTextFromVariantOutput(){
+  const txt = document.getElementById("variantOutput").value || "";
+  if(!txt.trim()) return "";
+
+  const numbering = document.getElementById("numbering").value;
+  const abcMode = document.getElementById("abcMode").value;
+
+  const blockPrefix = (document.getElementById("blockPrefix").value || "++++");
+  const firstPrefix = (document.getElementById("firstPrefix").value || "====#");
+  const otherPrefix = (document.getElementById("otherPrefix").value || "====");
+
+  const lines = txt.replace(/\r\n/g,"\n").split("\n");
+
+  let out = [];
+  let stop = false;
+
+  let qCounter = 0;
+  let aCounter = 0;
+
+  function addVariantHeader(vNo){
+    out.push("VARIANT " + vNo);
+    out.push("");
+  }
+
+  function startNewVariant(vNo){
+    qCounter = 0;
+    aCounter = 0;
+    if(out.length>0 && out[out.length-1].trim()!=="") out.push("");
+    addVariantHeader(vNo);
+  }
+
+  let sawAnyVariantHeader = false;
+
+  for(let raw of lines){
+    let line = (raw || "").trimEnd();
+
+    if(/^=====+\s*UMUMIY\s*HISOBOT/i.test(line)) stop = true;
+    if(stop) continue;
+
+    const mVar = line.match(/^VARIANT\s*(\d+)/i);
+    if(mVar){
+      sawAnyVariantHeader = true;
+      startNewVariant(parseInt(mVar[1],10));
+      continue;
+    }
+
+    if(line.trim()===""){
+      out.push("");
+      continue;
+    }
+
+    if(!sawAnyVariantHeader && line.startsWith(blockPrefix) && qCounter===0 && out.length===0){
+      startNewVariant(1);
+    }
+
+    if(line.startsWith(blockPrefix)){
+      qCounter++;
+      aCounter = 0;
+
+      let qText = line.slice(blockPrefix.length).trimStart();
+      qText = qText.replace(/^\d+\.\s+/, "");
+
+      if(numbering === "yes"){
+        qText = qCounter + ". " + qText;
+      }
+
+      out.push(qText);
+      continue;
+    }
+
+    if(line.startsWith(firstPrefix) || line.startsWith(otherPrefix)){
+      let aText = line.replace(firstPrefix,"").replace(otherPrefix,"").trimStart();
+      aText = aText.replace(/^[a-z]\)\s+/i, "");
+
+      if(abcMode === "yes"){
+        aText = String.fromCharCode(97 + aCounter) + ") " + aText;
+      }
+
+      aCounter++;
+      out.push(aText);
+      continue;
+    }
+
+    out.push(line);
+  }
+
+  let cleaned = [];
+  let emptyRun = 0;
+  for(const l of out){
+    if((l || "").trim()===""){
+      emptyRun++;
+      if(emptyRun<=2) cleaned.push("");
+    }else{
+      emptyRun=0;
+      cleaned.push(l);
+    }
+  }
+
+  return cleaned.join("\n").trim() + "\n";
+}
+
+function getStudentWordHTML(plainText){
+  const safe = (plainText || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/\n/g,"<br>");
+
+  const msoStyle = `
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:Zoom>100</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+@page Section1{
+  size: 595.28pt 841.89pt;
+  margin: 20mm 18mm 20mm 18mm;
+}
+div.Section1{ page: Section1; }
+body{font-family:Segoe UI, Arial, sans-serif;font-size:12pt;line-height:1.4;}
+</style>`;
+  return `<!doctype html><html><head><meta charset="utf-8">${msoStyle}</head><body><div class="Section1">${safe}</div></body></html>`;
+}
+
+function downloadStudentWord(){
+  const plain = buildStudentTextFromVariantOutput();
+  if(!plain.trim()){ alert("Avval variantlarni yasang."); return; }
+
+  const htmlDoc = getStudentWordHTML(plain);
+  const blob = new Blob([htmlDoc], {type:"application/msword"});
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "talaba_savol_javob.doc";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+}
+
+/* jadval doim ko‘rinsin */
+document.addEventListener("DOMContentLoaded", ()=>{ buildAnswerKeyFromVariantOutput(); });
 </script>
 
-
-
-<div style="padding:25px; max-width:950px; margin:auto;">
-    <button onclick="downloadResult('txt')">Yuklab olish (TXT)</button>
-    <button onclick="downloadResult('doc')">Yuklab olish (DOC)</button>
-    <button onclick="downloadResult('xlsx')">Yuklab olish (Excel)</button>
+<div style="padding:25px;max-width:950px;margin:auto;">
+  <button onclick="downloadResult('txt')">Yuklab olish (TXT)</button>
+  <button onclick="downloadResult('doc')">Yuklab olish (DOC)</button>
+  <button onclick="downloadResult('xlsx')">Yuklab olish (Excel)</button>
 </div>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
